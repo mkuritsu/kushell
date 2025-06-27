@@ -1,7 +1,6 @@
 pragma Singleton
 
 import QtQuick
-import QtMultimedia
 import Quickshell
 import Quickshell.Services.Notifications
 
