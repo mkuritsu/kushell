@@ -1,5 +1,5 @@
+{ inputs, ... }:
 {
-  inputs,
   config,
   pkgs,
   lib,
@@ -10,14 +10,14 @@ let
 in
 {
   options.programs.kushell = {
-    enable = lib.mkEnableOption "enable kushell";
+    enable = lib.mkEnableOption "kushell";
   };
 
-  home.packages = lib.optionals cfg.enable [
-    inputs.quickshell.packages.${pkgs.system}
-  ];
+  config = lib.mkIf cfg.enable {
+    home.packages = [
+      inputs.quickshell.packages.${pkgs.system}.default
+    ];
 
-  xdg.configFile."quickshell/kushell" = lib.mkIf cfg.enable {
-    source = ../src;
+    xdg.configFile."quickshell/kushell".source = ../src;
   };
 }

@@ -11,23 +11,21 @@
   };
 
   outputs =
-    { nixpkgs, systems, ... }@inputs:
+    {
+      self,
+      nixpkgs,
+      systems,
+      ...
+    }@inputs:
     let
       eachSystem =
         fn: nixpkgs.lib.genAttrs (import systems) (system: fn nixpkgs.legacyPackages.${system});
     in
     {
-      homeModules.kushell =
-        { config, ... }:
-        {
-          extraSpecialArgs = {
-            inherit inputs;
-          };
-
-          imports = [
-            ./nix/hm-module.nix
-          ];
-        };
+      homeModules = {
+        kushell = import ./nix/hm-module.nix { inherit inputs; };
+        default = self.homeModules.default;
+      };
 
       devShells = eachSystem (pkgs: {
         default = pkgs.mkShell {
