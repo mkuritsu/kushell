@@ -5,6 +5,6 @@ import "root:/services"
 Text {
     color: "#f5c2e7"
     font.pixelSize: 14
-    font.family: "jetbrain mono"
+    font.family: "jetbrains mono"
     text: `${ActiveWindow.title}`
 }

@@ -5,21 +5,19 @@ import Quickshell
 import Quickshell.Widgets
 import Quickshell.Services.SystemTray
 
-RowLayout {
+Row {
     id: row
-    height: parent.height
     spacing: 10
 
     Repeater {
         model: SystemTray.items
 
         MouseArea {
-            required property SystemTrayItem modelData
+            required property var modelData
 
             id: trayItem
             height: row.height
-            implicitWidth: height * 0.6
-
+            implicitWidth: height
             onClicked: menu.open()
 
             QsMenuAnchor {

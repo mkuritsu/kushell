@@ -14,7 +14,6 @@ Singleton {
 
     NotificationServer {
         id: notificationServer
-
         keepOnReload: false
         actionsSupported: true
         bodyHyperlinksSupported: true
@@ -23,14 +22,7 @@ Singleton {
         imageSupported: true
         onNotification: notification => {
             notification.tracked = true
-            console.log("Notif")
-            notificationSound.play()
             root.notification(notification)
         }
-    }
-
-    SoundEffect {
-        id: notificationSound
-        source: "root:/assets/sound/notification_pop.wav"
     }
 }
