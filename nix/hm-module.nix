@@ -1,7 +1,5 @@
-{ inputs, ... }:
 {
   config,
-  pkgs,
   lib,
   ...
 }:
@@ -14,11 +12,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [
-      kdePackages.qtmultimedia
-      inputs.quickshell.packages.${pkgs.system}.default
-    ];
-
     xdg.configFile."quickshell/kushell".source = ../kushell;
   };
 }
