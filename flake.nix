@@ -24,7 +24,7 @@
     {
       homeModules = {
         kushell = import ./nix/hm-module.nix inputs;
-        default = self.homeModules.default;
+        default = self.homeModules.kushell;
       };
 
       devShells = eachSystem (pkgs: {
