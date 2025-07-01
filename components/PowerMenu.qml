@@ -4,6 +4,7 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
 import "root:/widgets"
+import "root:/config"
 
 LazyLoader {
     id: root
@@ -14,7 +15,7 @@ LazyLoader {
         exclusionMode: ExclusionMode.Ignore
 		WlrLayershell.layer: WlrLayer.Overlay
         WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
-        color: "#c2000000"
+        color: ShellConfig.overlayShadowColor
         anchors {
             top: true
             bottom: true
@@ -31,7 +32,7 @@ LazyLoader {
             anchors.centerIn: parent
             width: parent.width * 0.7
             height: parent.height * 0.7
-            color: "#181825"
+            color: ShellConfig.backgroundColor
             radius: 25
             focus: true
 

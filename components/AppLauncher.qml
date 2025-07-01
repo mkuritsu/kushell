@@ -1,8 +1,10 @@
 import QtQuick
 import QtQuick.Controls
 import Quickshell
+import Quickshell.Widgets
 import Quickshell.Hyprland
 import Quickshell.Wayland
+import "root:/config"
 
 Scope {
     id: root
@@ -24,7 +26,7 @@ Scope {
 
         PanelWindow {
             id: appLauncher
-            color: "#4d000000"
+            color: ShellConfig.overlayShadowColor
             exclusionMode: ExclusionMode.Ignore
             WlrLayershell.layer: WlrLayer.Overlay
             WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
@@ -50,7 +52,7 @@ Scope {
                 implicitWidth: 800
                 implicitHeight: 400
                 radius: 18
-                color: "#13121B"
+                color: ShellConfig.backgroundColor
 
                 Column {
                     property string searchQuery: ""
@@ -62,14 +64,14 @@ Scope {
                         anchors.horizontalCenter: parent.horizontalCenter
                         width: parent.width * 0.95
                         height: 30
-                        color: "black"
+                        color: ShellConfig.backgroundAccentColor
 
                         TextInput {
                             id: searchField
                             anchors.verticalCenter: parent.verticalCenter
-                            color: "white"
-                            font.pixelSize: 14
-                            font.family: "jetbrains mono nf"
+                            color: ShellConfig.textColor
+                            font.pixelSize: ShellConfig.fontSize
+                            font.family: ShellConfig.fontFamily
                             focus: true
                             onTextChanged: container.searchQuery = this.text
 
@@ -91,6 +93,7 @@ Scope {
                     ScrollView {
                         implicitWidth: parent.width * 0.95
                         implicitHeight: parent.height * 0.8
+                        clip: true
 
                         ListView {
                             id: appList
@@ -104,7 +107,7 @@ Scope {
 
                                 implicitWidth: parent.width
                                 implicitHeight: 30
-                                color: appList.currentIndex == index ? "#45475a" : "transparent"
+                                color: appList.currentIndex == index ? ShellConfig.highlightColor : "transparent"
 
                                 MouseArea {
                                     id: mouseArea
@@ -119,13 +122,25 @@ Scope {
                                     }
                                 }
 
-                                Text {
-                                    anchors.verticalCenter: parent.verticalCenter
-                                    text: `${modelData.name}`
-                                    color: "white"
-                                    font.pixelSize: 14
-                                    font.family: "JetBrains Mono NL Nerd Font"
+                                Row {
+                                    anchors.fill: parent
+                                    spacing: 10
+
+                                    IconImage {
+                                        source: Quickshell.iconPath(modelData?.icon, "root:/assets/broken_image.svg")
+                                        height: parent.height
+                                        width: height
+                                    }
+                                    
+                                    Text {
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        text: `${modelData.name}`
+                                        color: ShellConfig.textColor
+                                        font.pixelSize: ShellConfig.fontSize
+                                        font.family: ShellConfig.fontFamily
+                                    }
                                 }
+
                             }
                         }
                     }

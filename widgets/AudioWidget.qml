@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.Pipewire
+import "root:/config"
 
 Row {
     spacing: 5
@@ -9,15 +10,15 @@ Row {
     Text {
         color: "#94e2d5"
         text: `${Pipewire.defaultAudioSink == null ? 0 : Math.round(Pipewire.defaultAudioSink.audio.volume * 100)}% `
-        font.pixelSize: 14
-        font.family: "jetbrains mono nf"
+        font.pixelSize: ShellConfig.fontSize
+        font.family: ShellConfig.fontFamily
     }
     
     Text {
         color: "#94e2d5"
         text: `${Pipewire.defaultAudioSource == null ? 0 : Math.round(Pipewire.defaultAudioSource.audio.volume * 100)}% `
-        font.pixelSize: 14
-        font.family: "jetbrains mono nf"
+        font.pixelSize: ShellConfig.fontSize
+        font.family: ShellConfig.fontFamily
     }
 
     PwObjectTracker {

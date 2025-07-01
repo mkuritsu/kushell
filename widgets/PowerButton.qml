@@ -2,6 +2,7 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
+import "root:/config"
 
 Rectangle {
     id: root
@@ -11,7 +12,7 @@ Rectangle {
 
     Layout.fillHeight: true
     Layout.fillWidth: true
-    color: mouseArea.containsMouse ? "#CBA6F7" : "transparent"
+    color: mouseArea.containsMouse ? ShellConfig.accentColor : "transparent"
 
     MouseArea {
         id: mouseArea
@@ -65,8 +66,9 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottomMargin: 20
         text: root.text
-        font.pixelSize: 20
-        color: "white"
+        font.pixelSize: ShellConfig.titleFontSize
+        font.family: ShellConfig.fontFamily
+        color: ShellConfig.textColor
     }
 
     Process {

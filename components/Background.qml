@@ -16,6 +16,7 @@ Scope {
 
             PanelWindow {
                 required property ShellScreen modelData
+                
                 id: panel
                 screen: modelData
                 anchors {

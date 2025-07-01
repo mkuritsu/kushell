@@ -1,10 +1,11 @@
 import QtQuick
 import "root:/services"
+import "root:/config"
 
 Text {
     text: Time.time
     color: "#f9e2af"
-    font.pixelSize: 14
-    font.family: "jetbrains mono"
+    font.pixelSize: ShellConfig.fontSize
+    font.family: ShellConfig.fontFamily
     font.bold: true
 }

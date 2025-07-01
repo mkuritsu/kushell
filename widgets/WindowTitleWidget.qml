@@ -1,10 +1,11 @@
 import QtQuick
 import Quickshell
 import "root:/services"
+import "root:/config"
 
 Text {
-    color: "#f5c2e7"
-    font.pixelSize: 14
-    font.family: "jetbrains mono"
+    color: ShellConfig.textAccentColor
+    font.pixelSize: ShellConfig.fontSize
+    font.family: ShellConfig.fontFamily
     text: `${ActiveWindow.title}`
 }

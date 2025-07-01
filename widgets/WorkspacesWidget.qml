@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Hyprland
+import "root:/config"
 
 RowLayout {
     required property var screen
@@ -22,14 +23,14 @@ RowLayout {
             visible: modelData.monitor == null ? false : modelData.monitor.name == screen.name
             width: 30
             height: row.height
-            color: (this.focused ? "#CBA6F7" : "transparent")
+            color: (this.focused ? ShellConfig.accentColor : "transparent")
             
             Text {
                 anchors.centerIn: parent
                 text: `${modelData.id}`
-                color: container.focused ? "white" : "#CBA6F7"
-                font.pixelSize: 14
-                font.family: "jetbrains mono"
+                color: container.focused ? ShellConfig.textColor : ShellConfig.accentColor
+                font.pixelSize: ShellConfig.fontSize
+                font.family: ShellConfig.fontFamily
                 font.bold: true
             }
 

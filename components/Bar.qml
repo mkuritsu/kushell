@@ -5,7 +5,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import "root:/widgets"
 import "root:/services"
-import "PowerMenu.qml"
+import "root:/config"
 
 Scope {
     PowerMenu {
@@ -19,7 +19,7 @@ Scope {
         PanelWindow {
             property var modelData
             screen: modelData
-            color: "#181825"
+            color: ShellConfig.backgroundColor
             implicitHeight: 30
             anchors {
                 top: true
