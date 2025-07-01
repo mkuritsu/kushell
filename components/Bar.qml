@@ -1,10 +1,18 @@
 import Quickshell
+import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls
 import "root:/widgets"
 import "root:/services"
+import "PowerMenu.qml"
 
 Scope {
+    PowerMenu {
+        id: powerMenu
+        active: false
+    }
+
     Variants {
         model: Quickshell.screens
 
@@ -75,6 +83,19 @@ Scope {
 
                         ClockWidget {
                             anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        IconImage {
+                            source: "root:/assets/shutdown.png"
+                            anchors.verticalCenter: parent.verticalCenter
+                            height: parent.height * 0.9
+                            width: height
+
+                            MouseArea {
+                                anchors.fill: parent
+                                cursorShape: Qt.PointingHandCursor
+                                onClicked: powerMenu.active = true
+                            }
                         }
                     }
                 }
