@@ -5,6 +5,10 @@ import Quickshell.Hyprland
 import Quickshell.Wayland
 
 Scope {
+    id: root
+
+    readonly property list<DesktopEntry> applications: DesktopEntries.applications.values
+
     GlobalShortcut {
         appid: "kushell"
         name: "applauncher"
@@ -13,6 +17,7 @@ Scope {
         }
     }
 
+
     LazyLoader {
         id: appLauncherLoader
         active: false
@@ -20,7 +25,9 @@ Scope {
         PanelWindow {
             id: appLauncher
             color: "#4d000000"
+            exclusionMode: ExclusionMode.Ignore
             WlrLayershell.layer: WlrLayer.Overlay
+            WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
             anchors {
                 top: true
                 bottom: true
@@ -68,10 +75,11 @@ Scope {
 
                             Keys.onPressed: event => {
                                 if (event.key == Qt.Key_Down) {
-                                    appList.forceActiveFocus()
-                                    appList.currentIndex = Math.min(1, appList.model.values.length - 1)
-                                } else if (event.key == Qt.Key_Enter - 1) {
-                                    appList.model.values[appList.currentIndex].execute()
+                                    appList.currentIndex = Math.min(appList.model.length - 1, appList.currentIndex + 1)
+                                } else if (event.key == Qt.Key_Up) {
+                                    appList.currentIndex = Math.max(0, appList.currentIndex - 1)
+                                } else if (event.key == Qt.Key_Enter - 1) { // for some reason enter is -1?
+                                    appList.model[appList.currentIndex].execute()
                                     appLauncherLoader.active = false
                                 } else if (event.key == Qt.Key_Escape) {
                                     appLauncherLoader.active = false
@@ -86,16 +94,9 @@ Scope {
 
                         ListView {
                             id: appList
+                            currentIndex: 0
                             anchors.fill: parent
-                            model: ScriptModel {
-                                values: DesktopEntries.applications.values.filter(a => a.name.toLowerCase().includes(container.searchQuery.toLowerCase())).sort((a, b) => a.name.localeCompare(b.name))
-                            }
-
-                            Keys.onPressed: event => {
-                                if (event.key == Qt.Key_Escape || (event.key == Qt.Key_Up && this.currentIndex == 0)) {
-                                    searchField.focus = true
-                                }
-                            }
+                            model: root.applications.filter(a => a.name.toLowerCase().includes(container.searchQuery.toLowerCase())).sort((a, b) => a.name.localeCompare(b.name))
 
                             delegate: Rectangle {
                                 required property int index
@@ -118,19 +119,12 @@ Scope {
                                     }
                                 }
 
-                                Keys.onPressed: event => {
-                                    if (event.key == Qt.Key_Enter - 1) {
-                                        appList.model.values[appList.currentIndex].execute()
-                                        appLauncherLoader.active = false
-                                    }
-                                }
-
                                 Text {
                                     anchors.verticalCenter: parent.verticalCenter
                                     text: `${modelData.name}`
                                     color: "white"
                                     font.pixelSize: 14
-                                    font.family: "jetbrains mono nf"
+                                    font.family: "JetBrains Mono NL Nerd Font"
                                 }
                             }
                         }
