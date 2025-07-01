@@ -27,12 +27,12 @@ Singleton {
             property string fontFamily: "JetBrains Mono NL Nerd Font"
             property real fontSize: 14
             property real titleFontSize: 20
-            property string textColor: "#ebedf3"
-            property string textAccentColor: "#f5c2e7"
-            property string accentColor: "#CBA6F7"
+            property string textColor: "white"
+            property string textAccentColor: "#D699B6"
+            property string accentColor: "#DBBC7F"
             property string highlightColor: "#45475a"
-            property string backgroundColor: "#181825"
-            property string backgroundAccentColor: "#151520"
+            property string backgroundColor: "#232A2E"
+            property string backgroundAccentColor: "#232A2E"
             property string overlayShadowColor: "#c2000000"
         }
     }

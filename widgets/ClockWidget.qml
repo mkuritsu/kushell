@@ -4,7 +4,7 @@ import "root:/config"
 
 Text {
     text: Time.time
-    color: "#f9e2af"
+    color: "#DBBC7F"
     font.pixelSize: ShellConfig.fontSize
     font.family: ShellConfig.fontFamily
     font.bold: true
