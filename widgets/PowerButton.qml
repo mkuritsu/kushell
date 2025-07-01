@@ -11,7 +11,7 @@ Rectangle {
 
     Layout.fillHeight: true
     Layout.fillWidth: true
-    color: mouseArea.containsMouse ? "purple" : "transparent"
+    color: mouseArea.containsMouse ? "#CBA6F7" : "transparent"
 
     MouseArea {
         id: mouseArea
@@ -40,6 +40,9 @@ Rectangle {
 
     PropertyAnimation {
         id: scaleUpAnimation
+        easing.type: Easing.OutQuad;
+        easing.amplitude: 2.0;
+        easing.period: 1.5
         target: scaleTransform
         properties: "scale"
         to: 1.1
@@ -48,6 +51,9 @@ Rectangle {
 
     PropertyAnimation {
         id: scaleDownAnimation
+        easing.type: Easing.InQuad;
+        easing.amplitude: 2.0;
+        easing.period: 1.5
         target: scaleTransform
         properties: "scale"
         to: 1.0

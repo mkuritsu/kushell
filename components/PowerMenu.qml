@@ -22,12 +22,6 @@ LazyLoader {
             right: true
         }
 
-        Keys.onPressed: event => {
-            if (event.key == Qt.Key_Escape) {
-                root.active = false;
-            }
-        }
-
         MouseArea {
             anchors.fill: parent
             onClicked: root.active = false
@@ -37,7 +31,15 @@ LazyLoader {
             anchors.centerIn: parent
             width: parent.width * 0.7
             height: parent.height * 0.7
-            color: "black"
+            color: "#181825"
+            radius: 25
+            focus: true
+
+            Keys.onPressed: event => {
+                if (event.key == Qt.Key_Escape) {
+                    root.active = false;
+                }
+            }
 
             GridLayout {
                 anchors.fill: parent
@@ -49,24 +51,28 @@ LazyLoader {
                     text: "Shutdown"
                     icon: "root:/assets/shutdown.png"
                     command: "systemctl shutdown"
+                    topLeftRadius: 25
                 }
 
                 PowerButton {
                     text: "Reboot"
                     icon: "root:/assets/reboot.png"
                     command: "systemctl reboot"
+                    topRightRadius: 25
                 }
 
                 PowerButton {
                     text: "Logout"
                     icon: "root:/assets/logout.png"
                     command: "hyprctl dispatch exit"
+                    bottomLeftRadius: 25
                 }
 
                 PowerButton {
                     text: "Sleep"
                     icon: "root:/assets/suspend.png"
                     command: "systemctl suspend"
+                    bottomRightRadius: 25
                 }
             }
         }
