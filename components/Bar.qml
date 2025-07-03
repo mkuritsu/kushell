@@ -72,11 +72,16 @@ Scope {
                         anchors.rightMargin: 10
                         spacing: 15
 
+
                         TrayWidget {
                             anchors.verticalCenter: parent.verticalCenter
                             height: parent.height
                         }
 
+                        BatteryWidget {
+                            anchors.verticalCenter: parent.verticalCenter   
+                        }
+                        
                         AudioWidget { 
                             anchors.verticalCenter: parent.verticalCenter
                         }
