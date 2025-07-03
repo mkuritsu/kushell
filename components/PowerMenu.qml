@@ -51,7 +51,7 @@ LazyLoader {
                 PowerButton {
                     text: "Shutdown"
                     icon: "root:/assets/shutdown.png"
-                    command: "systemctl shutdown"
+                    command: "systemctl poweroff"
                     topLeftRadius: 25
                 }
 
