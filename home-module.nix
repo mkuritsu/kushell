@@ -7,15 +7,15 @@ inputs:
 }:
 let
   cfg = config.programs.kushell;
-
-  defaultPackage = inputs.quickshell.packages.${pkgs.system}.default;
 in
 {
   options.programs.kushell = {
     enable = lib.mkEnableOption "kushell";
 
-    package = lib.mkPackageOption pkgs "quickshell" {
-      default = [ defaultPackage ];
+    package = lib.mkOption {
+      type = lib.types.package;
+      description = "The Quickshell package to use";
+      default = inputs.quickshell.packages.${pkgs.system}.default;
     };
   };
 
