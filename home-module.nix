@@ -20,7 +20,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    xdg.configFile."quickshell/kushell".source = ../.;
+    xdg.configFile."quickshell/kushell".source = ./.;
 
     home.packages = [
       cfg.package
