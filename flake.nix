@@ -23,7 +23,7 @@
     in
     {
       homeModules = {
-        kushell = import ./nix/hm-module.nix inputs;
+        kushell = import ./home-module.nix inputs;
         default = self.homeModules.kushell;
       };
 
