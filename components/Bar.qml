@@ -72,7 +72,6 @@ Scope {
                         anchors.rightMargin: 10
                         spacing: 15
 
-
                         TrayWidget {
                             anchors.verticalCenter: parent.verticalCenter
                             height: parent.height
