@@ -10,6 +10,8 @@ Rectangle {
     required property string text
     required property string icon
 
+    signal clicked()
+
     Layout.fillHeight: true
     Layout.fillWidth: true
     color: mouseArea.containsMouse ? ShellConfig.accentColor : "transparent"
@@ -18,7 +20,10 @@ Rectangle {
         id: mouseArea
         hoverEnabled: true
         anchors.fill: parent
-        onClicked: proc.running = true
+        onClicked: {
+            root.clicked()
+            proc.running = true
+        }
         onEntered: scaleUpAnimation.start()
         onExited: scaleDownAnimation.start()
     }

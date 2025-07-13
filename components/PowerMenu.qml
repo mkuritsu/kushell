@@ -74,6 +74,9 @@ LazyLoader {
                     icon: "root:/assets/suspend.png"
                     command: "systemctl suspend"
                     bottomRightRadius: 25
+                    onClicked: {
+                        root.active = false;
+                    }
                 }
             }
         }
