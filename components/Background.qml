@@ -34,6 +34,13 @@ Scope {
                     anchors.fill: parent
                     fillMode: Image.PreserveAspectCrop
                     source: imagePath
+                    Image{
+                        id: default_img
+                        anchors.fill: parent
+                        fillMode: Image.PreserveAspectCrop
+                        source: "root:/assets/wallpaper.jpg"
+                        visible: wallpaper.status != Image.Ready 
+                    }
                 }
             }
         }
