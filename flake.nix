@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    systems.url = "github:nix-systems/default";
     quickshell = {
       url = "github:quickshell-mirror/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -11,26 +10,24 @@
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      systems,
-      ...
-    }@inputs:
+    { nixpkgs, ... }@inputs:
     let
-      eachSystem =
-        fn: nixpkgs.lib.genAttrs (import systems) (system: fn nixpkgs.legacyPackages.${system});
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
+
+      eachSystem = fn: nixpkgs.lib.genAttrs systems (system: fn nixpkgs.legacyPackages.${system});
     in
     {
-      homeModules = {
-        kushell = import ./home-module.nix inputs;
-        default = self.homeModules.kushell;
-      };
+      packages = eachSystem (pkgs: rec {
+        default = pkgs.callPackage (import ./package.nix inputs) { };
+        kushell = default;
+      });
 
       devShells = eachSystem (pkgs: {
         default = pkgs.mkShell {
           packages = with pkgs; [
-            kdePackages.qtdeclarative
             kdePackages.qttools
           ];
         };
