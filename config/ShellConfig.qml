@@ -2,6 +2,7 @@ pragma Singleton
 
 import Quickshell
 import Quickshell.Io
+import Qt.labs.platform
 
 Singleton {
     property alias titleFontSize: json.titleFontSize
@@ -14,6 +15,7 @@ Singleton {
     property alias overlayShadowColor: json.overlayShadowColor
     property alias textColor: json.textColor
     property alias textAccentColor: json.textAccentColor
+    property alias wallpaperPath: json.wallpaperPath
 
     FileView {
         path: "config.json"
@@ -34,6 +36,7 @@ Singleton {
             property string backgroundColor: "#232A2E"
             property string backgroundAccentColor: "#232A2E"
             property string overlayShadowColor: "#c2000000"
+            property string wallpaperPath: `${StandardPaths.writableLocation(StandardPaths.HomeLocation)}/.config/background`
         }
     }
 }

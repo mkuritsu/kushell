@@ -9,5 +9,5 @@ Singleton {
         values: UPower.devices.values.filter(d => d.isLaptopBattery)
     }
 
-    property real percentage: Math.round(laptopBatteries.values[0].percentage * 100)
+    property real percentage: Math.round(laptopBatteries.values[0]?.percentage * 100)
 }

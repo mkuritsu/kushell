@@ -2,9 +2,7 @@ import Quickshell
 import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
 import "root:/widgets"
-import "root:/services"
 import "root:/config"
 
 Scope {
@@ -17,7 +15,8 @@ Scope {
         model: Quickshell.screens
 
         PanelWindow {
-            property var modelData
+            required property ShellScreen modelData
+
             screen: modelData
             color: ShellConfig.backgroundColor
             implicitHeight: 30
@@ -31,26 +30,15 @@ Scope {
                 anchors.fill: parent
                 spacing: 0
 
-                Rectangle { // left
+                // left
+                Rectangle {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     color: "transparent"
-                    clip: true
-
-                    Row {
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.leftMargin: 10
-                        anchors.left: parent.left
-                        spacing: 0
-
-                        WindowTitleWidget {
-                            anchors.verticalCenter: parent.verticalCenter
-                        }
-                    }
-
                 }
 
-                Rectangle { // center
+                // center
+                Rectangle {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     color: "transparent"
@@ -61,7 +49,8 @@ Scope {
                     }
                 }
 
-                Rectangle { // right
+                // right
+                Rectangle {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     color: "transparent"
@@ -90,8 +79,8 @@ Scope {
                         }
 
                         IconImage {
-                            source: "root:/assets/shutdown.png"
                             anchors.verticalCenter: parent.verticalCenter
+                            source: "root:/assets/shutdown.png"
                             height: parent.height * 0.9
                             width: height
 

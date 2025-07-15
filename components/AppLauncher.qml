@@ -19,7 +19,6 @@ Scope {
         }
     }
 
-
     LazyLoader {
         id: appLauncherLoader
         active: false
@@ -140,7 +139,6 @@ Scope {
                                         font.family: ShellConfig.fontFamily
                                     }
                                 }
-
                             }
                         }
                     }

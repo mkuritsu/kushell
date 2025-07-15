@@ -2,45 +2,41 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
-import Qt.labs.platform
+import "root:/config"
 
-Scope {
-    readonly property string imagePath: `${StandardPaths.writableLocation(StandardPaths.HomeLocation)}/.config/background`
+LazyLoader {
+    id: backgroundLoader
+    active: true
 
-    LazyLoader {
-        id: backgroundLoader
-        active: true
+    Variants {
+        model: Quickshell.screens
 
-        Variants {
-            model: Quickshell.screens
-
-            PanelWindow {
-                required property ShellScreen modelData
-                
-                id: panel
-                screen: modelData
-                anchors {
-                    top: true
-                    bottom: true
-                    left: true
-                    right: true
-                }
-                WlrLayershell.exclusionMode: ExclusionMode.Ignore
-                WlrLayershell.layer: WlrLayer.Background
+        PanelWindow {
+            required property ShellScreen modelData
+            
+            id: panel
+            screen: modelData
+            anchors {
+                top: true
+                bottom: true
+                left: true
+                right: true
+            }
+            WlrLayershell.exclusionMode: ExclusionMode.Ignore
+            WlrLayershell.layer: WlrLayer.Background
                     
-                Image {
-                    id: wallpaper
-                    asynchronous: true
+            Image {
+                id: wallpaper
+                asynchronous: true
+                anchors.fill: parent
+                fillMode: Image.PreserveAspectCrop
+                source: ShellConfig.wallpaperPath
+                Image{
+                    id: default_img
                     anchors.fill: parent
                     fillMode: Image.PreserveAspectCrop
-                    source: imagePath
-                    Image{
-                        id: default_img
-                        anchors.fill: parent
-                        fillMode: Image.PreserveAspectCrop
-                        source: "root:/assets/wallpaper.jpg"
-                        visible: wallpaper.status != Image.Ready 
-                    }
+                    source: "root:/assets/wallpaper.jpg"
+                    visible: wallpaper.status != Image.Ready 
                 }
             }
         }
