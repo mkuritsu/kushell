@@ -1,45 +1,50 @@
-import QtQuick
-import QtQuick.Layouts
 import Quickshell
 import Quickshell.Hyprland
+import QtQuick
+import QtQuick.Layouts
 import "root:/config"
 
+import "root:/services"
+
 RowLayout {
-    required property var screen
-    
-    id: row
-    height: parent.height
+  required property ShellScreen screen
+  required property real bottomRadius
 
-    Repeater {
-        model: Hyprland.workspaces
+  id: row
+  height: parent.height
 
-        Rectangle {
-            required property int index
-            required property var modelData
-
-            id: container
-            visible: modelData.monitor == null ? false : modelData.monitor.name == screen.name
-            width: 30
-            Layout.fillHeight: true
-            color: (modelData.focused ? ShellConfig.accentColor : "transparent")
-            
-            Text {
-                anchors.centerIn: parent
-                text: `${modelData.id}`
-                color: modelData.focused ? ShellConfig.textColor : ShellConfig.accentColor
-                font.pixelSize: ShellConfig.fontSize
-                font.family: ShellConfig.fontFamily
-                font.bold: true
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                onPressed: {
-                    if (!modelData.focused) {
-                        modelData.activate()
-                    }
-                }
-            }
-        }
+  Repeater {
+    model: ScriptModel {
+      values: Hyprland.workspaces.values.filter(w => w.monitor != null && w.monitor.name == screen.name)
     }
+
+    Rectangle {
+      required property int index
+      required property HyprlandWorkspace modelData
+
+      id: container
+      Layout.fillHeight: true
+      width: 30
+      color: (modelData.focused ? ShellConfig.accentColor : "transparent")
+      bottomLeftRadius: index == 0 ? row.bottomRadius : 0
+
+      Text {
+        anchors.centerIn: parent
+        text: `${modelData.id}`
+        color: modelData.focused ? ShellConfig.textColor : ShellConfig.accentColor
+        font.pixelSize: ShellConfig.fontSize
+        font.family: ShellConfig.fontFamily
+        font.bold: true
+      }
+
+      MouseArea {
+        anchors.fill: parent
+        onPressed: {
+          if (!modelData.focused) {
+            modelData.activate()
+          }
+        }
+      }
+    }
+  }
 }

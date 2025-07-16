@@ -1,98 +1,93 @@
 import Quickshell
-import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
-import "root:/widgets"
 import "root:/config"
+import "root:/widgets"
+import "root:/services"
 
-Scope {
-    PowerMenu {
-        id: powerMenu
-        active: false
+PanelWindow {
+  implicitHeight: 25
+  color: "transparent"
+  anchors {
+    top: true
+    left: true
+    right: true
+  }
+
+  Rectangle {
+    id: background
+    anchors.centerIn: parent
+    color: ShellConfig.backgroundColor
+    height: parent.height
+    width: parent.width * (ActiveWindow.activeWindow ? 1 : 0.45)
+    bottomLeftRadius: ActiveWindow.activeWindow ? 0 : 10
+    bottomRightRadius: ActiveWindow.activeWindow ? 0 : 10
+
+    Behavior on width {
+      PropertyAnimation {
+        duration: 200
+        easing.type: Easing.InOutQuad;
+      }
     }
+  }
 
-    Variants {
-        model: Quickshell.screens
+  Rectangle {
+    id: bar
+    anchors.centerIn: parent
+    color: ShellConfig.backgroundColor
+    height: parent.height
+    width: parent.width * 0.45
+    bottomLeftRadius: ActiveWindow.activeWindow ? 0 : 10
+    bottomRightRadius: ActiveWindow.activeWindow ? 0 : 10
 
-        PanelWindow {
-            required property ShellScreen modelData
+    RowLayout {
+      anchors.fill: parent
+      spacing: 0
 
-            screen: modelData
-            color: ShellConfig.backgroundColor
-            implicitHeight: 30
-            anchors {
-                top: true
-                left: true
-                right: true
-            }
+      Rectangle {
+        Layout.fillHeight: true
+        Layout.fillWidth: true
+        color: "transparent"
+        bottomLeftRadius: background.bottomLeftRadius
 
-            RowLayout {
-                anchors.fill: parent
-                spacing: 0
-
-                // left
-                Rectangle {
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
-                    color: "transparent"
-                }
-
-                // center
-                Rectangle {
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
-                    color: "transparent"
-
-                    WorkspacesWidget { 
-                        screen: modelData
-                        anchors.centerIn: parent
-                    }
-                }
-
-                // right
-                Rectangle {
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
-                    color: "transparent"
-
-                    Row {
-                        anchors.right: parent.right
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.rightMargin: 10
-                        spacing: 15
-
-                        TrayWidget {
-                            anchors.verticalCenter: parent.verticalCenter
-                            height: parent.height
-                        }
-
-                        BatteryWidget {
-                            anchors.verticalCenter: parent.verticalCenter   
-                        }
-                        
-                        AudioWidget { 
-                            anchors.verticalCenter: parent.verticalCenter
-                        }
-
-                        ClockWidget {
-                            anchors.verticalCenter: parent.verticalCenter
-                        }
-
-                        IconImage {
-                            anchors.verticalCenter: parent.verticalCenter
-                            source: "root:/assets/shutdown.png"
-                            height: parent.height * 0.9
-                            width: height
-
-                            MouseArea {
-                                anchors.fill: parent
-                                cursorShape: Qt.PointingHandCursor
-                                onClicked: powerMenu.active = true
-                            }
-                        }
-                    }
-                }
-            }
+        WorkspacesWidget {
+          anchors.verticalCenter: parent.verticalCenter
+          screen: modelData
+          bottomRadius: background.bottomRightRadius
         }
+      }
+
+      Rectangle {
+        Layout.fillHeight: true
+        Layout.fillWidth: true
+        color: "transparent"
+
+        ClockWidget {
+          anchors.centerIn: parent
+        }
+      }
+
+      Rectangle {
+        Layout.fillHeight: true
+        Layout.fillWidth: true
+        color: "transparent"
+        bottomRightRadius: background.bottomRightRadius
+
+        Row {
+          anchors.right: parent.right
+          anchors.verticalCenter: parent.verticalCenter
+          height: parent.height
+          spacing: 15
+
+          BatteryWidget {
+            anchors.verticalCenter: parent.verticalCenter
+          }
+
+          AudioWidget {
+            anchors.verticalCenter: parent.verticalCenter
+          }
+        }
+      }
     }
+  }
 }
