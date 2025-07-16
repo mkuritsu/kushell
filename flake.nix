@@ -17,21 +17,28 @@
         "aarch64-linux"
       ];
 
-      eachSystem = fn: nixpkgs.lib.genAttrs systems (system: fn nixpkgs.legacyPackages.${system});
-
-      mkQuickshellPackage =
-        pkgs:
-        inputs.quickshell.packages.${pkgs.system}.default.override {
-          # Disable uneeded modules to have less things to compile
-          withX11 = false;
-          withPam = false;
-          withI3 = false;
-        };
+      eachSystem =
+        fn:
+        nixpkgs.lib.genAttrs systems (
+          system:
+          fn (
+            import nixpkgs {
+              inherit system;
+              overlays = [
+                (import ./overlay.nix inputs)
+              ];
+            }
+          )
+        );
     in
     {
       packages = eachSystem (pkgs: rec {
-        default = pkgs.callPackage (import ./package.nix (mkQuickshellPackage pkgs)) { };
+        default = pkgs.callPackage ./package.nix { };
         kushell = default;
+      });
+
+      devShells = eachSystem (pkgs: {
+        default = pkgs.callPackage ./shell.nix { };
       });
     };
 }

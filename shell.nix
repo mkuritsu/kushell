@@ -1,4 +1,11 @@
-{ pkgs, quickshell }:
+{
+  pkgs,
+  quickshell,
+  kdePackages,
+}:
 pkgs.mkShell {
-  packages = [ quickshell ];
+  packages = [
+    quickshell
+    kdePackages.qttools
+  ];
 }

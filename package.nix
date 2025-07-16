@@ -1,7 +1,7 @@
-quickshell:
 {
   symlinkJoin,
   makeWrapper,
+  quickshell,
 }:
 symlinkJoin {
   pname = "kushell";
