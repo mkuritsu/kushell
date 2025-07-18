@@ -12,6 +12,6 @@ symlinkJoin {
   nativeBuildInputs = [ makeWrapper ];
 
   postBuild = ''
-    makeWrapper $out/bin/quickshell $out/bin/kushell --add-flags '-p ${./.}'
+    makeWrapper $out/bin/quickshell $out/bin/kushell --unset QT_STYLE_OVERRIDE --add-flags '-p ${./.}'
   '';
 }

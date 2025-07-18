@@ -2,6 +2,9 @@
 import Quickshell
 import "components"
 
+import QtQuick
+import Quickshell.Services.Pam
+
 ShellRoot {
   Variants {
     model: Quickshell.screens

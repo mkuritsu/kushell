@@ -1,5 +1,9 @@
 # kushell
 
-This repository holds my custom made shell powered by [Quickshell](https://quickshell.outfoxxed.me/)
+This repository holds my custom made shell powered by the awesome [Quickshell](https://quickshell.outfoxxed.me/)
 
-Power icons taken from: https://github.com/quickshell-mirror/quickshell-examples
+Wishlist:
+- greeter
+- screenshot utility
+- decent app launcher
+- expandable bar with more options

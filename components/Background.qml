@@ -6,7 +6,7 @@ import "root:/config"
 PanelWindow {
   WlrLayershell.exclusionMode: ExclusionMode.Ignore
   WlrLayershell.layer: WlrLayer.Background
-  color: "transparent"
+  color: ShellConfig.backgroundColor
   anchors {
     top: true
     bottom: true
@@ -15,9 +15,10 @@ PanelWindow {
   }
 
   Image {
-    id: wallpaper
     asynchronous: true
     anchors.fill: parent
+    width: parent.width
+    height: parent.height
     fillMode: Image.PreserveAspectCrop
     source: ShellConfig.wallpaperPath
   }
