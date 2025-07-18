@@ -16,6 +16,7 @@ Singleton {
   property alias textColor: json.textColor
   property alias textAccentColor: json.textAccentColor
   property alias wallpaperPath: json.wallpaperPath
+  property alias activeModules: json.activeModules
 
   FileView {
     path: `${StandardPaths.writableLocation(StandardPaths.HomeLocation)}/.config/kushell/config.json`
@@ -37,6 +38,7 @@ Singleton {
       property string backgroundAccentColor: "#232A2E"
       property string overlayShadowColor: "#c2000000"
       property string wallpaperPath: `${StandardPaths.writableLocation(StandardPaths.HomeLocation)}/.config/background`
+      property list<string> activeModules: ["applauncher", "background", "bar"]
     }
   }
 }

@@ -8,5 +8,4 @@ pkgs.mkShell {
     quickshell
     kdePackages.qttools
   ];
-
 }

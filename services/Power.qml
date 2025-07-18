@@ -4,9 +4,11 @@ import Quickshell
 import Quickshell.Services.UPower
 
 Singleton {
+  readonly property bool isLaptop: laptopBatteries.values.length > 0
+
   readonly property ScriptModel laptopBatteries: ScriptModel {
     values: UPower.devices.values.filter(d => d.isLaptopBattery)
   }
 
-  readonly property real percentage: Math.round(laptopBatteries.values[0]?.percentage * 100)
+  readonly property real batteryPercentage: Math.round(laptopBatteries.values[0]?.percentage * 100)
 }

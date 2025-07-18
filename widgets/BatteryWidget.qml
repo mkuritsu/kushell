@@ -1,10 +1,10 @@
 import QtQuick
-import "root:/services"
+import "root:/services" as Services
 import "root:/config"
 
 Text {
-  visible: Battery.laptopBatteries.values.length > 0
-  text: `${Battery.percentage}% `
+  visible: Services.Power.isLaptop
+  text: `${Services.Power.percentage}% `
   color: ShellConfig.accentColor
   font.pixelSize: ShellConfig.fontSize
   font.family: ShellConfig.fontFamily

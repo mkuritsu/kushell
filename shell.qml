@@ -1,23 +1,31 @@
-//@ pragma UseQApplication
 import Quickshell
-import "components"
-
-import QtQuick
-import Quickshell.Services.Pam
+import "modules"
+import "config"
 
 ShellRoot {
+  LazyLoader {
+    active: ShellConfig.activeModules.includes("applauncher")
+    AppLauncher { }
+  }
+  
   Variants {
     model: Quickshell.screens
 
     Scope {
       required property ShellScreen modelData
 
-      Background {
-        screen: modelData
+      LazyLoader {
+        active: ShellConfig.activeModules.includes("background")
+        Background {
+          screen: modelData
+        }
       }
 
-      Bar {
-        screen: modelData
+      LazyLoader {
+        active: ShellConfig.activeModules.includes("bar")
+        Bar {
+          screen: modelData
+        }
       }
     }
   }
