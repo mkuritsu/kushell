@@ -3,10 +3,10 @@ import qs.services as Services
 import qs.config
 
 Text {
-  visible: Services.Power.isLaptop
-  text: `${Services.Power.percentage}% `
+  id: text
+  text: Qt.formatDateTime(Services.Time.date, "HH:mm:ss")
   color: Settings.accentColor
-  font.pixelSize: Settings.fontSize
+  font.pixelSize: 128
   font.family: Settings.fontFamily
   font.bold: true
 }

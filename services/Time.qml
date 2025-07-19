@@ -3,12 +3,10 @@ pragma Singleton
 import Quickshell
 
 Singleton {
-  readonly property string time: {
-    Qt.formatDateTime(clock.date, "HH:mm dd/MM/yyyy")
-  }
+  property alias date: clock.date
 
   SystemClock {
     id: clock
-    precision: SystemClock.Minutes
+    precision: SystemClock.Seconds
   }
 }

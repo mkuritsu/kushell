@@ -7,3 +7,5 @@ Wishlist:
 - screenshot utility
 - decent app launcher
 - expandable bar with more options
+- lockscreen
+- nixos/home-manager module to manage settings through nix

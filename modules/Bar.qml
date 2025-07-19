@@ -3,92 +3,85 @@ import Quickshell.Wayland
 import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Layouts
-import "root:/config"
-import "root:/widgets"
-import "root:/services"
+import qs.config
+import qs.widgets
 
-Scope {
-  required property ShellScreen screen
+PanelWindow {
   // TODO: add better check for this, probably need to check current Hyprland workspace in each monitor and if they have any active client in them
   // usage of quickshell hyprland ipc module will be needed for this i believe
-  readonly property bool hasActiveWindow: (ToplevelManager.activeToplevel?.activated && ToplevelManager.activeToplevel?.screens.includes(screen)) ?? false
+  readonly property bool hasActiveWindow: ToplevelManager.activeToplevel?.activated ?? false
 
   id: root
-  
-  PanelWindow {
-    id: window
-    anchors.top: true
-    implicitHeight: !root.hasActiveWindow || (root.hasActiveWindow && mouseArea.containsMouse) ? 25 : 7
-    implicitWidth: screen.width * 0.45
-    color: "transparent"
-    screen: root.screen
-    WlrLayershell.layer: WlrLayer.Top
-    WlrLayershell.exclusionMode: ExclusionMode.Ignore
+  anchors {
+    top: true
+    left: true
+    right: true
+    bottom: true
+  }
+  implicitHeight: 25
+  focusable: false
+  color: "transparent"
+  WlrLayershell.layer: WlrLayer.Top
+  WlrLayershell.exclusionMode: ExclusionMode.Ignore
+  mask: Region {
+    item: barContainer
+  }
+
+  Rectangle {
+    id: barContainer
+    anchors.horizontalCenter: parent.horizontalCenter
+    width: root.screen.width * 0.4
+    height: !root.hasActiveWindow || (root.hasActiveWindow && mouseArea.containsMouse) ? 25 : 7
+    bottomLeftRadius: 10
+    bottomRightRadius: bottomLeftRadius
+    color: Settings.backgroundColor
+
+    Behavior on height {
+      PropertyAnimation {
+        duration: 200
+        easing.type: Easing.InOutQuad
+      }
+    }
 
     MouseArea {
       id: mouseArea
-      anchors.fill: parent
       hoverEnabled: true
+      anchors.fill: parent
     }
 
-    Rectangle {
-      id: barContainer
-      visible: window.implicitHeight > 7
+    RowLayout {
+      visible: parent.height > 10
       anchors.fill: parent
-      bottomLeftRadius: 15
-      bottomRightRadius: bottomLeftRadius
-      color: ShellConfig.backgroundColor
+      spacing: 0
 
-      RowLayout {
-        anchors.fill: parent
-        spacing: 0
+      Rectangle {
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+        color: "transparent"
+        bottomLeftRadius: barContainer.bottomLeftRadius
 
-        Rectangle {
-          Layout.fillWidth: true
-          Layout.fillHeight: true
-          bottomLeftRadius: barContainer.bottomLeftRadius
-          color: "transparent"
-          clip: true
-
-          WorkspacesWidget {
-            anchors.verticalCenter: parent.verticalCenter
-            bottomRadius: parent.bottomLeftRadius
-            screen: window.screen
-          }
+        WorkspacesWidget {
+          anchors.verticalCenter: parent.verticalCenter
+          bottomRadius: parent.bottomLeftRadius
+          screen: root.screen
         }
+      }
 
-        Rectangle {
-          Layout.fillWidth: true
-          Layout.fillHeight: true
-          color: "transparent"
-          clip: true
+      Rectangle {
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+        color: "transparent"
 
-          ClockWidget {
-            anchors.centerIn: parent
-          }
+        ClockWidget {
+          anchors.centerIn: parent
         }
+      }
 
-        Rectangle {
-          Layout.fillWidth: true
-          Layout.fillHeight: true
-          bottomRightRadius: barContainer.bottomRightRadius
-          color: "transparent"
-          clip: true
-
-          Row {
-            anchors.right: parent.right
-            anchors.rightMargin: 10
-            height: parent.height
-
-            BatteryWidget {
-              anchors.verticalCenter: parent.verticalCenter
-            }
-
-            AudioWidget {
-              anchors.verticalCenter: parent.verticalCenter
-            }
-          }
-        }
+      Rectangle {
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+        color: "transparent"
+        bottomRightRadius: barContainer.bottomRightRadius
       }
     }
   }

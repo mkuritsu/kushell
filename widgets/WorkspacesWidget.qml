@@ -2,7 +2,7 @@ import Quickshell
 import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Layouts
-import "root:/config"
+import qs.config
 
 import "root:/services"
 
@@ -25,15 +25,15 @@ RowLayout {
       id: container
       Layout.fillHeight: true
       width: 30
-      color: (modelData.focused ? ShellConfig.accentColor : "transparent")
+      color: (modelData.focused ? Settings.accentColor : "transparent")
       bottomLeftRadius: index == 0 ? row.bottomRadius : 0
 
       Text {
         anchors.centerIn: parent
         text: `${modelData.id}`
-        color: modelData.focused ? ShellConfig.textColor : ShellConfig.accentColor
-        font.pixelSize: ShellConfig.fontSize
-        font.family: ShellConfig.fontFamily
+        color: modelData.focused ? Settings.textColor : Settings.accentColor
+        font.pixelSize: Settings.fontSize
+        font.family: Settings.fontFamily
         font.bold: true
       }
 

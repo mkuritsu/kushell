@@ -1,11 +1,24 @@
 import Quickshell
-import "modules"
-import "config"
+import qs.modules
+import qs.config
 
 ShellRoot {
   LazyLoader {
-    active: ShellConfig.activeModules.includes("applauncher")
+    active: Settings.activeModules.includes("applauncher")
+    
     AppLauncher { }
+  }
+
+  LazyLoader {
+    active: Settings.activeModules.includes("screenshot")
+
+    Screenshot { }
+  }
+
+  LazyLoader {
+    active: Settings.isModuleEnabled("lockscreen")
+
+    Lockscreen { }
   }
   
   Variants {
@@ -15,14 +28,16 @@ ShellRoot {
       required property ShellScreen modelData
 
       LazyLoader {
-        active: ShellConfig.activeModules.includes("background")
+        active: Settings.activeModules.includes("background")
+
         Background {
           screen: modelData
         }
       }
 
       LazyLoader {
-        active: ShellConfig.activeModules.includes("bar")
+        active: Settings.activeModules.includes("bar")
+
         Bar {
           screen: modelData
         }

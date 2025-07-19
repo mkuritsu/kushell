@@ -2,7 +2,6 @@ pragma Singleton
 
 import Quickshell
 import Quickshell.Io
-import Qt.labs.platform
 
 Singleton {
   property alias titleFontSize: json.titleFontSize
@@ -18,8 +17,12 @@ Singleton {
   property alias wallpaperPath: json.wallpaperPath
   property alias activeModules: json.activeModules
 
+  function isModuleEnabled(module) {
+    return this.activeModules.includes(module)
+  }
+
   FileView {
-    path: `${StandardPaths.writableLocation(StandardPaths.HomeLocation)}/.config/kushell/config.json`
+    path: `${Quickshell.env("HOME")}/.config/kushell/config.json`
     watchChanges: true
     onFileChanged: reload()
     onAdapterUpdated: writeAdapter()
@@ -27,7 +30,7 @@ Singleton {
     JsonAdapter {
       id: json
       
-      property string fontFamily: "JetBrains Mono NL Nerd Font"
+      property string fontFamily: "CaskaydiaMono Nerd Font Mono"
       property real fontSize: 14
       property real titleFontSize: 20
       property string textColor: "white"
@@ -37,8 +40,8 @@ Singleton {
       property string backgroundColor: "#2B3339"
       property string backgroundAccentColor: "#232A2E"
       property string overlayShadowColor: "#c2000000"
-      property string wallpaperPath: `${StandardPaths.writableLocation(StandardPaths.HomeLocation)}/.config/background`
-      property list<string> activeModules: ["applauncher", "background", "bar"]
+      property string wallpaperPath: `${Quickshell.env("HOME")}/.config/background`
+      property list<string> activeModules: ["applauncher", "background", "bar", "screenshot", "lockscreen"]
     }
   }
 }

@@ -5,8 +5,8 @@ import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
-import "root:/config"
-import "root:/utils"
+import qs.config
+import qs.utils
 
 Scope {
   GlobalShortcut {
@@ -45,7 +45,7 @@ Scope {
 
       Rectangle {
         anchors.fill: parent
-        color: ShellConfig.backgroundColor
+        color: Settings.backgroundColor
         opacity: 0.5
       }
 
@@ -54,8 +54,8 @@ Scope {
         implicitWidth: 500
         implicitHeight: 300
         radius: 10
-        color: ShellConfig.backgroundColor
-        border.color: ShellConfig.accentColor
+        color: Settings.backgroundColor
+        border.color: Settings.accentColor
         border.width: 2
 
         ColumnLayout {
@@ -66,12 +66,12 @@ Scope {
 
           TextInput {
             id: searchBox
-            selectionColor: ShellConfig.highlightColor
+            selectionColor: Settings.highlightColor
             Layout.fillWidth: true
             height: 30
-            color: ShellConfig.textColor
-            font.pixelSize: ShellConfig.fontSize
-            font.family: ShellConfig.fontFamily
+            color: Settings.textColor
+            font.pixelSize: Settings.fontSize
+            font.family: Settings.fontFamily
             focus: true
 
             Keys.onPressed: event => {
@@ -108,7 +108,7 @@ Scope {
 
                 implicitWidth: appList.width
                 implicitHeight: 30
-                color: (appList.currentIndex == index || appMouse.containsMouse) ? ShellConfig.highlightColor : "transparent"
+                color: (appList.currentIndex == index || appMouse.containsMouse) ? Settings.highlightColor : "transparent"
 
                 MouseArea {
                   id: appMouse
@@ -134,9 +134,9 @@ Scope {
                   Text {
                     anchors.verticalCenter: parent.verticalCenter
                     text: modelData.name
-                    color: ShellConfig.textColor
-                    font.pixelSize: ShellConfig.fontSize
-                    font.family: ShellConfig.fontFamily
+                    color: Settings.textColor
+                    font.pixelSize: Settings.fontSize
+                    font.family: Settings.fontFamily
                   }
                 }
               }
