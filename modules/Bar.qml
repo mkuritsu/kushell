@@ -3,8 +3,8 @@ import Quickshell.Wayland
 import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Layouts
+import qs.widgets as Widgets
 import qs.config
-import qs.widgets
 
 PanelWindow {
   // TODO: add better check for this, probably need to check current Hyprland workspace in each monitor and if they have any active client in them
@@ -60,7 +60,7 @@ PanelWindow {
         color: "transparent"
         bottomLeftRadius: barContainer.bottomLeftRadius
 
-        WorkspacesWidget {
+        Widgets.Workspaces {
           anchors.verticalCenter: parent.verticalCenter
           bottomRadius: parent.bottomLeftRadius
           screen: root.screen
@@ -72,7 +72,7 @@ PanelWindow {
         Layout.fillHeight: true
         color: "transparent"
 
-        ClockWidget {
+        Widgets.Clock {
           anchors.centerIn: parent
         }
       }

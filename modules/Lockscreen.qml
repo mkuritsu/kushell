@@ -6,8 +6,8 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import QtQuick.Effects
-import qs.config
 import qs.widgets as Widgets
+import qs.config
 
 Scope {
   GlobalShortcut {
@@ -27,10 +27,6 @@ Scope {
       } else {
         pam.start()
       }
-    }
-
-    onPamMessage: {
-      console.log(message)
     }
   }
 

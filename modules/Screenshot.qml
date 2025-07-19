@@ -58,7 +58,6 @@ Scope {
 
             anchors.fill: parent
             onPressed: event => {
-              console.log("Pressed")
               selectionRect.visible = true
               selectionRect.width = 0
               selectionRect.height = 0
