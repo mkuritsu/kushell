@@ -11,7 +11,8 @@ Singleton {
   function launchApplication(application) {
     if (application.runInTerminal) {
       const terminal = Quickshell.env("TERMINAL")
-      processExecutor.command = [terminal, "-e", application.execString]
+      const exec = application.execString.split(" ")[0];
+      processExecutor.command = [terminal, "-e", exec]
       processExecutor.startDetached()
       return
     }
