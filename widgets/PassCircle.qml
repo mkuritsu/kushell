@@ -1,4 +1,5 @@
 import QtQuick
+import qs.config
 
 Rectangle {
   required property bool shouldAnimate
@@ -6,7 +7,7 @@ Rectangle {
 
   id: root
   radius: 50
-  color: "white"
+  color: Settings.textColor
   width: 50
   height: width
   transform: Translate {

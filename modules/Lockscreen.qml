@@ -42,7 +42,6 @@ Scope {
 
       Rectangle {
         anchors.fill: parent
-        color: "red"
 
         Image {
           id: background
