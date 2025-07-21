@@ -20,6 +20,6 @@ PanelWindow {
     asynchronous: true
     anchors.fill: parent
     fillMode: Image.PreserveAspectCrop
-    source: Settings.wallpaperPath
+    source: Globals.wallpaperPath
   }
 }

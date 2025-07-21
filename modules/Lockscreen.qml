@@ -46,7 +46,7 @@ Scope {
         Image {
           id: background
           anchors.fill: parent
-          source: Settings.wallpaperPath
+          source: Globals.wallpaperPath
         }
 
         MultiEffect {

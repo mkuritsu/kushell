@@ -10,7 +10,6 @@ Singleton {
   property alias accentColor: json.accentColor
   property alias highlightColor: json.highlightColor
   property alias backgroundColor: json.backgroundColor
-  property alias wallpaperPath: json.wallpaperPath
   property alias activeModules: json.activeModules
 
   function isModuleEnabled(module) {
@@ -32,7 +31,6 @@ Singleton {
       property string accentColor: "#7AA2F7"
       property string highlightColor: "#45475a"
       property string backgroundColor: "#1A1B26"
-      property string wallpaperPath: `${Quickshell.env("HOME")}/.config/background`
       property list<string> activeModules: ["applauncher", "background", "bar", "screenshot", "lockscreen"]
     }
   }
