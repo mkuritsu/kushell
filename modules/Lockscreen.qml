@@ -1,4 +1,5 @@
 import Quickshell
+import Quickshell.Io
 import Quickshell.Wayland
 import Quickshell.Hyprland
 import Quickshell.Services.Pam
@@ -14,6 +15,14 @@ Scope {
     appid: "kushell"
     name: "lock"
     onPressed: {
+      lock.locked = true
+    }
+  }
+
+  IpcHandler {
+    target: "lockscreen"
+
+    function lock(): void {
       lock.locked = true
     }
   }

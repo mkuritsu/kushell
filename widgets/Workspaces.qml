@@ -8,7 +8,7 @@ import "root:/services"
 
 RowLayout {
   required property ShellScreen screen
-  required property real bottomRadius
+  required property real radius
 
   id: row
   height: parent.height
@@ -26,7 +26,8 @@ RowLayout {
       Layout.fillHeight: true
       width: 30
       color: (modelData.focused ? Settings.accentColor : "transparent")
-      bottomLeftRadius: index == 0 ? row.bottomRadius : 0
+      bottomLeftRadius: index == 0 ? row.radius : 0
+      topLeftRadius: bottomLeftRadius
 
       Text {
         anchors.centerIn: parent

@@ -1,8 +1,9 @@
 import QtQuick
+import QtQuick.Layouts
 import qs.services as Services
 import qs.config
 
-Row {
+RowLayout {
   spacing: 5
 
   Text {
