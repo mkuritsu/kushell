@@ -2,11 +2,23 @@ import QtQuick
 import qs.services as Services
 import qs.config
 
-Text {
+Row {
   visible: Services.Power.isLaptop
-  text: `${Services.Power.percentage ?? 0}% `
-  color: Settings.accentColor
-  font.pixelSize: Settings.fontSize
-  font.family: Settings.fontFamily
-  font.bold: true
+  spacing: 5
+
+  Text {
+    anchors.verticalCenter: parent.verticalCenter
+    text: `${Services.Power.percentage ?? 0}%`
+    color: Settings.accentColor
+    font.pixelSize: Settings.fontSize
+    font.family: Settings.fontFamily
+  }
+
+  Text {
+    anchors.verticalCenter: parent.verticalCenter
+    text: ``
+    color: Settings.accentColor
+    font.pixelSize: Settings.fontSize * Settings.iconSizeMultiplier
+    font.family: Settings.fontFamily
+  }
 }

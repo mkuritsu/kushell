@@ -7,39 +7,20 @@ import qs.widgets as Widgets
 import qs.config
 
 PanelWindow {
-  readonly property bool hasActiveWindow: ToplevelManager.activeToplevel?.activated ?? false
-
   id: root
   anchors {
     top: true
     left: true
     right: true
   }
-  margins.top: root.hasActiveWindow ? 3 : 3
   implicitHeight: Settings.barHeight
   color: "transparent"
 
   Rectangle {
     id: barContainer
-    anchors.fill: parent
-    anchors.leftMargin: root.hasActiveWindow ? 20 : 20
-    anchors.rightMargin: root.hasActiveWindow ? 20 : 20
-    anchors.bottomMargin: 0
-    radius: root.hasActiveWindow ? 10 : 10
     color: Settings.backgroundColor
+    anchors.fill: parent
 
-    Behavior on anchors.leftMargin {
-      PropertyAnimation {
-        duration: 300
-      }
-    }
-
-    Behavior on anchors.rightMargin {
-      PropertyAnimation {
-        duration: 300
-      }
-    }
-    
     RowLayout {
       anchors.fill: parent
       spacing: 0
@@ -55,7 +36,8 @@ PanelWindow {
         Widgets.Workspaces {
           anchors.verticalCenter: parent.verticalCenter
           screen: root.screen
-          radius: parent.bottomLeftRadius
+          anchors.leftMargin: 10
+          anchors.fill: parent
         }
       }
 

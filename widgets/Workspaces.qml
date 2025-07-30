@@ -6,12 +6,10 @@ import qs.config
 
 import "root:/services"
 
-RowLayout {
+Row {
   required property ShellScreen screen
-  required property real radius
 
   id: row
-  height: parent.height
 
   Repeater {
     model: ScriptModel {
@@ -23,13 +21,14 @@ RowLayout {
       required property HyprlandWorkspace modelData
 
       id: container
-      Layout.fillHeight: true
-      width: 30
+      width: text.width + 30
+      height: text.height + 5
+      anchors.verticalCenter: parent.verticalCenter
+      radius: 20
       color: (modelData.focused ? Settings.accentColor : "transparent")
-      bottomLeftRadius: index == 0 ? row.radius : 0
-      topLeftRadius: bottomLeftRadius
 
       Text {
+        id: text
         anchors.centerIn: parent
         text: `${modelData.id}`
         color: modelData.focused ? Settings.textColor : Settings.accentColor
