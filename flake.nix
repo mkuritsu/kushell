@@ -9,18 +9,15 @@
     };
   };
 
-  outputs =
-    { nixpkgs, ... }@inputs:
-    let
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-      ];
+  outputs = {nixpkgs, ...} @ inputs: let
+    systems = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
 
-      eachSystem =
-        fn:
-        nixpkgs.lib.genAttrs systems (
-          system:
+    eachSystem = fn:
+      nixpkgs.lib.genAttrs systems (
+        system:
           fn (
             import nixpkgs {
               inherit system;
@@ -29,16 +26,15 @@
               ];
             }
           )
-        );
-    in
-    {
-      packages = eachSystem (pkgs: rec {
-        default = pkgs.callPackage ./package.nix { };
-        kushell = default;
-      });
+      );
+  in {
+    packages = eachSystem (pkgs: rec {
+      default = pkgs.callPackage ./package.nix {};
+      kushell = default;
+    });
 
-      devShells = eachSystem (pkgs: {
-        default = pkgs.callPackage ./shell.nix { };
-      });
-    };
+    devShells = eachSystem (pkgs: {
+      default = pkgs.callPackage ./shell.nix {};
+    });
+  };
 }

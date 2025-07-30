@@ -17,7 +17,7 @@ Singleton {
   }
 
   FileView {
-    path: `${Quickshell.env("HOME")}/.config/kushell/config.json`
+    path: `${Quickshell.env("XDG_CONFIG_HOME")}/kushell/config.json`
     watchChanges: true
     onFileChanged: reload()
     onAdapterUpdated: writeAdapter()
