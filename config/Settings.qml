@@ -7,7 +7,6 @@ Singleton {
   property alias fontFamily: json.fontFamily
   property alias fontSize: json.fontSize
   property alias barHeight: json.barHeight
-  property alias iconSizeMultiplier: json.iconSizeMultiplier
   property alias textColor: json.textColor
   property alias accentColor: json.accentColor
   property alias highlightColor: json.highlightColor
@@ -15,7 +14,7 @@ Singleton {
   property alias activeModules: json.activeModules
 
   function isModuleEnabled(module) {
-    return this.activeModules.includes(module)
+    return this.activeModules.includes(module);
   }
 
   FileView {
@@ -26,11 +25,10 @@ Singleton {
 
     JsonAdapter {
       id: json
-      
-      property string fontFamily: "CaskaydiaMono Nerd Font Mono"
+
+      property string fontFamily: "CaskaydiaMono Nerd Font"
       property real fontSize: 14
       property real barHeight: 30
-      property real iconSizeMultiplier: 1.7
       property string textColor: "#C0CAF5"
       property string accentColor: "#7AA2F7"
       property string highlightColor: "#45475a"

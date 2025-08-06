@@ -15,7 +15,7 @@ Scope {
     appid: "kushell"
     name: "lock"
     onPressed: {
-      lock.locked = true
+      lock.locked = true;
     }
   }
 
@@ -23,7 +23,7 @@ Scope {
     target: "lockscreen"
 
     function lock(): void {
-      lock.locked = true
+      lock.locked = true;
     }
   }
 
@@ -32,9 +32,9 @@ Scope {
 
     onCompleted: result => {
       if (result == PamResult.Success) {
-        lock.locked = false
+        lock.locked = false;
       } else {
-        pam.start()
+        pam.start();
       }
     }
   }
@@ -46,7 +46,7 @@ Scope {
     WlSessionLockSurface {
 
       Component.onCompleted: {
-        pam.start()
+        pam.start();
       }
 
       Rectangle {
@@ -71,27 +71,26 @@ Scope {
         }
 
         TextInput {
+          id: textInput
           property bool textIncreased: false
           property bool textDecreased: false
           property int lastLength: 0
-
-          id: textInput
           Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
           text: ""
           focus: true
           visible: false
           echoMode: TextInput.Password
           onTextChanged: {
-            textIncreased = false
-            textDecreased = false
-            textIncreased = text.length > lastLength
-            textDecreased = text.length < lastLength
-            lastLength = text.length
+            textIncreased = false;
+            textDecreased = false;
+            textIncreased = text.length > lastLength;
+            textDecreased = text.length < lastLength;
+            lastLength = text.length;
           }
 
           Keys.onPressed: event => {
             if (event.key == Qt.Key_Enter - 1) {
-              pam.respond(textInput.text)
+              pam.respond(textInput.text);
             }
           }
         }

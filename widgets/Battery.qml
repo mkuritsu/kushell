@@ -8,7 +8,7 @@ Row {
 
   Text {
     anchors.verticalCenter: parent.verticalCenter
-    text: `${Services.Power.percentage ?? 0}%`
+    text: `${Services.Power.batteryPercentage ?? 0}%`
     color: Settings.accentColor
     font.pixelSize: Settings.fontSize
     font.family: Settings.fontFamily
@@ -18,7 +18,7 @@ Row {
     anchors.verticalCenter: parent.verticalCenter
     text: ``
     color: Settings.accentColor
-    font.pixelSize: Settings.fontSize * Settings.iconSizeMultiplier
+    font.pixelSize: Settings.fontSize
     font.family: Settings.fontFamily
   }
 }

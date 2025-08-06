@@ -22,11 +22,11 @@ RowLayout {
       anchors.verticalCenter: parent.verticalCenter
       color: Settings.accentColor
       text: ``
-      font.pixelSize: Settings.fontSize * Settings.iconSizeMultiplier
+      font.pixelSize: Settings.fontSize
       font.family: Settings.fontFamily
     }
   }
-    
+
   Row {
     Layout.fillHeight: true
     spacing: 5
@@ -43,7 +43,7 @@ RowLayout {
       anchors.verticalCenter: parent.verticalCenter
       color: Settings.accentColor
       text: ``
-      font.pixelSize: Settings.fontSize * Settings.iconSizeMultiplier
+      font.pixelSize: Settings.fontSize
       font.family: Settings.fontFamily
     }
   }
