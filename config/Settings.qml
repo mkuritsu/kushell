@@ -2,6 +2,7 @@ pragma Singleton
 
 import Quickshell
 import Quickshell.Io
+import Qt.labs.platform
 
 Singleton {
   property alias fontFamily: json.fontFamily
@@ -18,7 +19,7 @@ Singleton {
   }
 
   FileView {
-    path: `${Quickshell.env("XDG_CONFIG_HOME")}/kushell/config.json`
+    path: `${StandardPaths.standardLocations(StandardPaths.ConfigLocation)[0]}/kushell/config.json`
     watchChanges: true
     onFileChanged: reload()
     onAdapterUpdated: writeAdapter()
