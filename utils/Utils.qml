@@ -2,6 +2,7 @@ pragma Singleton
 
 import Quickshell
 import Quickshell.Io
+import qs.config
 
 Singleton {
   Process {
@@ -9,13 +10,18 @@ Singleton {
   }
 
   function launchApplication(application) {
-    if (application.runInTerminal) {
-      const terminal = Quickshell.env("TERMINAL")
-      const exec = application.execString.split(" ")[0];
-      processExecutor.command = [terminal, "-e", exec]
-      processExecutor.startDetached()
-      return
+    let command = [];
+    if (Settings.launchPrefix) {
+      const prefix = Settings.launchPrefix.split(" ");
+      command = command.concat(prefix);
     }
-    application.execute()
+    if (application.runInTerminal) {
+      const terminal = Quickshell.env("TERMINAL");
+      command = command.concat([terminal, "-e"]);
+    }
+    const exec = application.execString.split(" ");
+    command = command.concat(exec);
+    processExecutor.command = command;
+    processExecutor.startDetached();
   }
 }

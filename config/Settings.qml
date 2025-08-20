@@ -13,6 +13,7 @@ Singleton {
   property alias highlightColor: json.highlightColor
   property alias backgroundColor: json.backgroundColor
   property alias activeModules: json.activeModules
+  property alias launchPrefix: json.launchPrefix
 
   function isModuleEnabled(module) {
     return this.activeModules.includes(module);
@@ -35,6 +36,7 @@ Singleton {
       property string highlightColor: "#45475a"
       property string backgroundColor: "#1A1B26"
       property list<string> activeModules: ["applauncher", "background", "bar", "screenshot", "lockscreen"]
+      property string launchPrefix: "uwsm app --"
     }
   }
 }
